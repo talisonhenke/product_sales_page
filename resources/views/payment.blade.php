@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Pagamento - eBook Digital</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+body, html {
+    height: 100%;
+    margin: 0;
+    background-image: url('images/bgtest4.jpg');
+    background-repeat: repeat-y;
+    background-size: 100vw 100vh;
+
+}
+
+a{
+  text-decoration: none;
+}
+    .payment-container {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .payment-method {
+        text-align: center;
+        padding: 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        color: #ffffff;
+    }
+    .payment-method:hover {
+      border-color: #007bff;
+      background-color: #f1f1f1;
+      color: #000000;
+    }
+    .payment-method.selected {
+      border-color: #007bff;
+      background-color: #e9f4ff;
+      color: #000000;
+    }
+    .payment-icons {
+      font-size: 30px;
+      margin-right: 10px;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: #007bff;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: 1px solid #fff;
+      padding: 5px 10px;
+      border-radius: 10px;
+      align-content: center;
+    }
+    .back-link:hover {
+      background-color: #ffffff;
+    }
+    .back-link i {
+      margin-right: 5px;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .invalid-feedback {
+      display: none;
+    }
+
+    .product-description{
+      margin: 25px 0;
+    }
+
+    .extra-product{
+      font-size: 1.2rem;
+      margin-left: 5px;
+    }
+
+    .product-text-div{
+      align-content: end;
+    }
+    .product-text{
+        /* height: 80%; */
+    }
+    .product-price{
+        align-content: center;
+        /* height: 20%; */
+        font-size: 2rem;
+        text-align: center;
+        color: rgb(0, 0, 0);
+        background-color: rgb(255, 255, 255);
+        /* margin: 20px 0; */
+    }
+    @media only screen and (max-width: 576px) {
+      /* telas de celular */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="col-sm-12 col-md-10 mx-auto">
+    <div class="payment-container">
+
+      <!-- Link para voltar à página anterior -->
+      <a href="javascript:history.back()" class="back-link"><i class="bi bi-arrow-left"></i> Voltar</a>
+
+      <!-- Título do formulário -->
+      <h2 class="text-center mb-4">Pagamento do eBook Digital</h2>
+
+      <!-- Formulário de Dados Pessoais -->
+      <h4 class="mb-3">Informações Pessoais</h4>
+      <form id="payment-form" novalidate>
+        <div class="form-group">
+          <label for="nome" class="form-label">Nome Completo</label>
+          <input type="text" class="form-control" id="nome" placeholder="Insira seu nome completo" required>
+          <div class="invalid-feedback">Por favor, insira seu nome completo.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="exemplo@email.com" required>
+          <div class="invalid-feedback">Por favor, insira um email válido.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="telefone" class="form-label">Telefone</label>
+          <input type="text" class="form-control" id="telefone" placeholder="(xx) xxxxx-xxxx" maxlength="15" required>
+          <div class="invalid-feedback">Por favor, insira um número de telefone válido.</div>
+        </div>
+
+        <!-- Informações do Produto -->
+        <h4 class="mt-4">Produto: eBook Digital - Receitas Saudáveis</h4>
+        <div class="row mb-4 product-description">
+          <div class="col-md-6">
+            <img src="images/capa-ebook.jpg" class="img-fluid rounded" alt="Capa do eBook">
+          </div>
+          <div class="col-md-6 product-text-div">
+            <p class="mt-0 product-text">Este eBook contém 50 receitas saudáveis para ajudar você a manter uma alimentação equilibrada e nutritiva.</p>
+            <p class="fw-bold product-price" id="current_price">Preço: R$ 20,00</p>
+          </div>
+        </div>
+
+        <!-- Produto extra -->
+        <div class="row mb-4 product-description">
+          <div class="col-md-12">
+            <input type="checkbox" id="crono" name="crono" value="false">
+            <label class="extra-product" for="crono">Por mais R$5,00 adicione um guia completo com cronograma para obter resultados com 100% de controle e eficácia!</label><br>
+          </div>
+        </div>
+
+        <!-- Opções de Pagamento -->
+        <h4>Escolha a Forma de Pagamento</h4>
+        <div class="row payment-options mb-3">
+          <div class="col-12 col-md-4 mb-2">
+            <a href="#card-details">
+              <div class="payment-method" data-payment="pix">
+                <i class="bi bi-qr-code payment-icons"></i> Pix
+              </div>
+            </a>
+          </div>
+          <div class="col-12 col-md-4 mb-2">
+            <a href="#card-details">
+              <div class="payment-method" data-payment="card">
+                <i class="bi bi-credit-card payment-icons"></i> Cartão
+              </div>
+            </a>
+          </div>
+          <div class="col-12 col-md-4 mb-2">
+            <a href="#card-details">
+              <div class="payment-method" data-payment="boleto">
+                <i class="bi bi-receipt payment-icons"></i> Boleto
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <input type="hidden" name="payment-method" id="payment-method" required>
+
+        <!-- Campos do Cartão (escondidos por padrão) -->
+        <div id="card-details" class="d-none">
+          <h5 class="mt-3">Informações do Cartão</h5>
+          <div class="form-group">
+            <label for="card-number" class="form-label">Número do Cartão</label>
+            <input type="text" class="form-control" id="card-number" placeholder="Número do seu cartão" required>
+            <div class="invalid-feedback">Por favor, insira o número do cartão.</div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label for="card-expiry" class="form-label">Validade</label>
+              <input type="text" class="form-control" id="card-expiry" placeholder="MM/AA" required>
+              <div class="invalid-feedback">Por favor, insira a validade do cartão.</div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="card-cvc" class="form-label">CVC</label>
+              <input type="text" class="form-control" id="card-cvc" placeholder="123" required>
+              <div class="invalid-feedback">Por favor, insira o código de segurança (CVC).</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botão de Finalizar Compra -->
+        <div class="d-grid mt-4">
+          <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-cart"> </i>Finalizar Compra</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Função para alternar as opções de pagamento e ocultar o ícone de radio
+    const paymentOptions = document.querySelectorAll('.payment-method');
+    const paymentMethodInput = document.getElementById('payment-method');
+    const cardDetails = document.getElementById('card-details');
+
+    paymentOptions.forEach(option => {
+      option.addEventListener('click', function () {
+        // Remove seleção anterior
+        paymentOptions.forEach(opt => opt.classList.remove('selected'));
+        // Adiciona seleção à opção clicada
+        this.classList.add('selected');
+        // Atribui o valor do método de pagamento ao input oculto
+        paymentMethodInput.value = this.getAttribute('data-payment');
+        
+        // Mostra campos de cartão se a opção "Cartão" for selecionada
+        if (this.getAttribute('data-payment') === 'card') {
+          cardDetails.classList.remove('d-none');
+        } else {
+          cardDetails.classList.add('d-none');
+        }
+      });
+    });
+
+    // Validação e formatação de telefone no padrão brasileiro
+    const telefoneInput = document.getElementById('telefone');
+    telefoneInput.addEventListener('input', function (e) {
+      let telefone = e.target.value.replace(/\D/g, ''); // Remove qualquer coisa que não seja número
+      telefone = telefone.replace(/^(\d{2})(\d)/g, '($1) $2'); // (xx) x
+      telefone = telefone.replace(/(\d{5})(\d)/, '$1-$2'); // xxxxx-xxxx
+      e.target.value = telefone;
+    });
+
+    // Validação de formulário
+    const form = document.getElementById('payment-form');
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity() || !paymentMethodInput.value) {
+        event.preventDefault();
+        event.stopPropagation();
+        form.classList.add('was-validated');
+      }
+    }, false);
+  </script>
+
+<script>
+    // Selecionar os elementos da checkbox e do preço
+    const checkbox = document.getElementById('crono');
+    const priceElement = document.getElementById('current_price');
+  
+    // Função para atualizar o preço
+    function updatePrice() {
+      if (checkbox.checked) {
+        priceElement.textContent = 'Preço: R$ 25,00'; // Preço com o guia
+      } else {
+        priceElement.textContent = 'Preço: R$ 20,00'; // Preço sem o guia
+      }
+    }
+  
+    // Adiciona o listener no checkbox para atualizar o preço sempre que for marcado ou desmarcado
+    checkbox.addEventListener('change', updatePrice);
+  </script>  
+
+</body>
+</html>
